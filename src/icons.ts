@@ -1,0 +1,1 @@
+export const MENU_ICON: string = require('!!svg-inline-loader!./assets/icons/menu.svg'); 

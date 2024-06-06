@@ -1,8 +1,3 @@
 import './index.css';
-
-
-function main(): void {
-  console.log('Hello');
-}
-
-main();
+import './layout/components/index';
+import './icons';

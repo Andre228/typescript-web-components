@@ -1,0 +1,41 @@
+:root {
+  --color-blue-1: #0086FF;
+  --color-blue-2: #406180;
+  --color-blue-3: #00284D;
+  --color-blue-4: #80C3FF;
+  --color-blue-5: #E6F3FF;
+}
+
+html {
+  height: 100%;
+}
+
+html body {
+  height: 100%;
+  margin: 0;
+}
+
+button {
+  border-radius: 50em;
+  border: unset;
+  padding: 12px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #1c1c1ce6;
+  background: transparent;
+  transition: 0.15s all;
+  cursor: pointer;
+  min-height: 42px;
+
+  background: var(--color-blue-5);
+}
+
+button:hover {
+  color: #fff;
+  background-color: var(--color-blue-4);
+}
+
+button:active {
+  background-color: var(--color-blue-1);
+}
+
