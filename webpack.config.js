@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: './src/index.ts',
@@ -38,6 +39,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'web components basic typescript', 
       template: 'src/index.html' }),
-    new MiniCssExtractPlugin({filename:"bundle.css"})
+    new MiniCssExtractPlugin({filename:"bundle.css"}),
+    new CopyPlugin({
+      patterns: [
+        { from: "./src/mock/message-mock.json", to: "message-mock.json" }
+      ],
+    }),
+  
    ],
 };

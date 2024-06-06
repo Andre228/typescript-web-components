@@ -1,10 +1,12 @@
 import { MENU_ICON } from '../../../icons';
+import { IMessage } from '../../../model/message.model';
+import { MessageService } from '../../../services/message-service';
 import './sidebar.css';
 
 export class Sidebar extends HTMLElement {
 
-  private _toggler: HTMLButtonElement | null;
   private readonly SIDEBAR_HEADER_TEXT = 'Header';
+  private _messages: IMessage [] = [];
 
   constructor() {
     super();
@@ -12,9 +14,7 @@ export class Sidebar extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = this.render();
-
-    this._toggler = this.querySelector('.sidebar-header .menu-toggler');
-    this._toggler?.addEventListener('click', this.toggle.bind(this));
+    this.loadMessages();
   }
 
   render(): string {
@@ -24,34 +24,61 @@ export class Sidebar extends HTMLElement {
           <div class="menu-header-text">${this.SIDEBAR_HEADER_TEXT}</div>
           <div class="menu-toggler">${MENU_ICON}</div>
         </div>
-        <div class="sidebar-content"></div>
+        <div class="sidebar-content">
+          ${this.renderMessagePreview()}
+        </div>
       </div>
     `;
   }
 
-  toggle(event: Event) {
-    const text = this.querySelector('.sidebar-header .menu-header-text') as HTMLDivElement;
-    const header = this.querySelector('.sidebar-header') as HTMLDivElement;
-    if (this.classList[0] === "fade-in") {
-      this.classList.remove("fade-in");
-      this.classList.add("fade-out");
-      
-      text.classList.remove("fade-in-text");
-      text.classList.add("fade-out-text");
+  private renderMessagePreview(): string {
+    const result = this._messages.map(item => {
+      return `
+        <div class="message-preview-item">
+          <div class="message-author">${item.author}</div>
+        </div>
+      `
+    });
 
-      header.classList.remove("fade-in-header");
-      header.classList.add("fade-out-header");
-    } else {
-      this.classList.remove("fade-out");
-      this.classList.add("fade-in");
+    return result.join('');
+  }
 
-      text.classList.remove("fade-out-text");
-      text.classList.add("fade-in-text");
+  private loadMessages(): void {
+    const messageService = new MessageService();
 
-      header.classList.remove("fade-out-header");
-      header.classList.add("fade-in-header");
+    messageService.getAllMessages().then(messages => {
+      this._messages = messages;
+
+      const content = this.querySelector('.sidebar-content');
+
+      if(content)
+        content.innerHTML = this.renderMessagePreview();
+     
+
+      content?.addEventListener('click', this.selectMessage.bind(this));
+    });
+  }
+
+  private selectMessage(event: Event): void {
+    event.preventDefault();
+
+    const list = this.querySelector('.sidebar-content')!!;
+    const msgElement = event.target as HTMLDivElement;
+
+    const result = msgElement.closest('.message-preview-item')!!;
+
+    if (result.className.includes('selected'))
+      return;
+
+    if (result) {
+
+      for(let i = 0; i < list.children.length; i++)
+        list.children[i].classList.remove('selected');
+  
+      result.classList.add('selected');
     }
   }
+
 }
 
 

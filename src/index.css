@@ -15,6 +15,10 @@ html body {
   margin: 0;
 }
 
+main {
+  height: 100%;
+}
+
 button {
   border-radius: 50em;
   border: unset;
@@ -26,7 +30,6 @@ button {
   transition: 0.15s all;
   cursor: pointer;
   min-height: 42px;
-
   background: var(--color-blue-5);
 }
 

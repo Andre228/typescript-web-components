@@ -1,0 +1,64 @@
+app-layout .layout-container {
+  display: flex;
+  gap: 20px;
+  width: calc(100% - 40px);
+  height: 100%;
+  margin-left: 20px;
+}
+
+app-sidebar.fade-in {
+  animation: fade-in 0.4s ease-in forwards;
+}
+
+app-sidebar.fade-out {
+  animation: fade-out 0.3s ease-out forwards;
+}
+
+app-chat.fade-in {
+  animation: fade-in-chat 0.4s ease-in forwards;
+}
+
+app-chat.fade-out {
+  animation: fade-out-chat 0.3s ease-out forwards;
+}
+
+
+@keyframes fade-in {
+  0% {
+    width: 30%;
+  }
+
+  100% {
+    width: 5%;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    width: 5%;
+  }
+
+  100% {
+    width: 30%;
+  }
+}
+
+@keyframes fade-in-chat {
+  0% {
+    width: 70%;
+  }
+
+  100% {
+    width: 95%;
+  }
+}
+
+@keyframes fade-out-chat {
+  0% {
+    width: 95%;
+  }
+
+  100% {
+    width: 70%;
+  }
+}

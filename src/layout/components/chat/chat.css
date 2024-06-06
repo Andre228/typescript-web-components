@@ -1,0 +1,16 @@
+app-chat {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  height: 100%;
+}
+
+app-chat .chat-container {
+  width: 100%;
+  height: 95%;
+  border-radius: 4px;
+  box-shadow: 2px 2px 12px 1px rgba(17, 17, 17, 0.3);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
